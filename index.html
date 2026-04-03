@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cowrie Group — Investing in the Foundations of Tomorrow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green-dark: #057347;
+    --green-mid: #008651;
+    --green-light: #289E6F;
+    --indigo: #342E93;
+    --cream: #F5F2ED;
+    --warm-white: #FAFAF8;
+    --charcoal: #1A1A18;
+    --stone: #8A8578;
+    --gold: #C9A96E;
+    --gold-light: #E8D5A3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.6rem 4rem;
+    background: transparent;
+    transition: background 0.5s, backdrop-filter 0.5s;
+  }
+  nav.scrolled {
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo svg { height: 42px; width: auto; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--charcoal); }
+  .nav-links a:hover { color: var(--gold); }
+  nav.scrolled .nav-links a:hover { color: var(--green-mid); }
+  .nav-cta {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.65rem 1.6rem;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  nav.scrolled .nav-cta { border-color: var(--green-mid); color: var(--green-mid); }
+  .nav-cta:hover { background: var(--gold); border-color: var(--gold); color: var(--charcoal); }
+  nav.scrolled .nav-cta:hover { background: var(--green-mid); color: white; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-video-wrap {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero-video-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(5,20,12,0.72) 0%,
+      rgba(5,115,71,0.28) 50%,
+      rgba(10,8,40,0.65) 100%
+    );
+  }
+  /* Animated gradient as video fallback / overlay */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 60%, rgba(5,115,71,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 30%, rgba(52,46,147,0.25) 0%, transparent 60%),
+      linear-gradient(175deg, #0D1F16 0%, #071A10 40%, #0A0828 100%);
+    animation: bgPulse 12s ease-in-out infinite alternate;
+  }
+  @keyframes bgPulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.12); }
+  }
+  /* Simulated sunrise ray */
+  .hero-ray {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 60%;
+    background: linear-gradient(to top, rgba(201,169,110,0.3), transparent);
+    box-shadow: 0 0 120px 60px rgba(201,169,110,0.08);
+    animation: rayPulse 6s ease-in-out infinite alternate;
+  }
+  @keyframes rayPulse {
+    0% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+    100% { opacity: 1; transform: translateX(-50%) scaleX(1.5); }
+  }
+  /* Horizon glow */
+  .hero-horizon {
+    position: absolute; bottom: 25%; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.4) 30%, rgba(40,158,111,0.6) 50%, rgba(201,169,110,0.4) 70%, transparent 100%);
+    animation: horizonShimmer 8s ease-in-out infinite;
+  }
+  @keyframes horizonShimmer {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; max-width: 900px; padding: 0 2rem;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+    margin-bottom: 1.4rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+  .hero-wordmark {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.8rem, 9vw, 8.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: white;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2.4rem;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 1s ease 0.45s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.25;
+    color: rgba(255,255,255,0.82);
+    letter-spacing: 0.01em;
+    margin-bottom: 1.8rem;
+    opacity: 0; transform: translateY(25px);
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.6); max-width: 560px; margin: 0 auto 3rem;
+    opacity: 0; transform: translateY(25px);
+    animation: fadeUp 1s ease 0.95s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1s ease 1.15s forwards;
+  }
+  .btn-primary {
+    display: inline-block; padding: 1rem 2.4rem;
+    background: var(--green-mid); color: white;
+    font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+    transition: all 0.35s;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-block; padding: 1rem 2.4rem;
+    border: 1px solid rgba(255,255,255,0.45); color: white;
+    font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+    transition: all 0.35s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeUp 1s ease 1.5s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 10rem 4rem;
+    background: var(--warm-white);
+    display: grid; grid-template-columns: 1fr 1.8fr; gap: 6rem;
+    align-items: center; max-width: 1400px; margin: 0 auto;
+  }
+  .about-label {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--green-mid); font-weight: 400; margin-bottom: 2rem;
+  }
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--charcoal);
+  }
+  .about-ornament {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--green-mid), var(--gold));
+    margin-top: 2.5rem;
+  }
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; line-height: 1.75;
+    color: #3A3A36; letter-spacing: 0.01em;
+  }
+  .about-text strong { font-weight: 500; color: var(--charcoal); }
+
+  /* ── PILLARS ── */
+  #pillars {
+    padding: 8rem 4rem;
+    background: var(--charcoal);
+  }
+  .pillars-header {
+    text-align: center; margin-bottom: 5rem;
+  }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1.2rem;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; color: white; line-height: 1.15;
+  }
+  .pillars-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5px; max-width: 1300px; margin: 0 auto;
+    background: rgba(255,255,255,0.06);
+  }
+  .pillar-card {
+    background: #1E1E1C;
+    padding: 3.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+  .pillar-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green-mid), var(--green-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  .pillar-card:hover::before { transform: scaleX(1); }
+  .pillar-card:hover { background: #252523; }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem; color: var(--gold); letter-spacing: 0.15em;
+    margin-bottom: 1.5rem; display: block;
+  }
+  .pillar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; font-weight: 400; color: white;
+    margin-bottom: 0.5rem; line-height: 1;
+  }
+  .pillar-focus {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--green-light); font-weight: 400; margin-bottom: 2rem;
+  }
+  .pillar-divider {
+    width: 30px; height: 1px; background: rgba(255,255,255,0.15);
+    margin-bottom: 2rem;
+  }
+  .pillar-preview {
+    font-size: 0.9rem; font-weight: 300; line-height: 1.65;
+    color: rgba(255,255,255,0.5);
+    transition: color 0.4s;
+  }
+  .pillar-card:hover .pillar-preview { color: rgba(255,255,255,0.75); }
+  .pillar-detail {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s;
+    opacity: 0;
+  }
+  .pillar-card:hover .pillar-detail { max-height: 200px; opacity: 1; }
+  .pillar-detail p {
+    font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.65);
+    margin-top: 1.2rem; font-weight: 300;
+  }
+  .pillar-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none; font-weight: 400;
+    opacity: 0; transition: opacity 0.4s 0.1s;
+  }
+  .pillar-card:hover .pillar-link { opacity: 1; }
+  .pillar-link::after { content: '→'; font-size: 1rem; }
+  .pillar-icon {
+    position: absolute; bottom: 2rem; right: 2.5rem;
+    font-size: 4rem; opacity: 0.05;
+    font-family: 'Cormorant Garamond', serif;
+    transition: opacity 0.4s;
+  }
+  .pillar-card:hover .pillar-icon { opacity: 0.08; }
+
+  /* ── STATS ── */
+  #stats {
+    padding: 7rem 4rem;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .stats-inner { max-width: 1300px; margin: 0 auto; }
+  .stats-header { margin-bottom: 4rem; }
+  .stats-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300; color: var(--charcoal);
+  }
+  .stats-scroll-track {
+    display: flex; gap: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .stat-item {
+    flex: 1; min-width: 0;
+    padding: 3.5rem 3rem;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    position: relative;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    margin-bottom: 2rem;
+  }
+  .stat-icon svg { width: 22px; height: 22px; fill: white; }
+  .stat-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--stone); font-weight: 400; margin-bottom: 1rem;
+  }
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 400; color: var(--charcoal);
+    line-height: 1; margin-bottom: 0.8rem;
+  }
+  .stat-desc {
+    font-size: 0.82rem; font-weight: 300; line-height: 1.6;
+    color: var(--stone);
+  }
+  .stat-tag {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--green-mid); font-weight: 400;
+    padding-bottom: 2px; border-bottom: 1px solid var(--green-mid);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: #0D1610;
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green-mid), var(--gold), var(--green-mid), transparent);
+    opacity: 0.4;
+  }
+  .contact-bg-text {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8rem, 15vw, 18rem);
+    font-weight: 300; color: rgba(255,255,255,0.02);
+    white-space: nowrap; pointer-events: none; user-select: none;
+    letter-spacing: -0.05em;
+  }
+  .contact-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .contact-left .section-title { color: white; margin-bottom: 1.5rem; }
+  .contact-left p {
+    font-size: 0.9rem; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.5); margin-bottom: 3rem;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-info a {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-info a:hover { color: var(--gold); }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+  }
+  .form-group select,
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white; padding: 0.85rem 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem; font-weight: 300;
+    outline: none; transition: border-color 0.3s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-group select option { background: #1A1A18; }
+  .form-group select:focus,
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--green-mid);
+  }
+  .form-group textarea { height: 110px; resize: none; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .btn-submit {
+    width: 100%; padding: 1rem;
+    background: var(--green-mid); border: none; color: white;
+    font-family: 'Outfit', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.15em; text-transform: uppercase; font-weight: 400;
+    cursor: pointer; transition: background 0.3s; margin-top: 0.5rem;
+  }
+  .btn-submit:hover { background: var(--green-dark); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080E0A;
+    padding: 3rem 4rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 2rem;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 1rem; }
+  .footer-logo svg { height: 30px; width: auto; }
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none; flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy {
+    font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.05em;
+    width: 100%; text-align: center; margin-top: 1rem;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(35px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 1.4rem 2rem; }
+    .nav-links { display: none; }
+    #about { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 2rem; }
+    #pillars { padding: 6rem 2rem; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    #stats { padding: 5rem 2rem; }
+    .stats-scroll-track { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); }
+    .stat-item:last-child { border-bottom: none; }
+    #contact { padding: 6rem 2rem 3rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
+    footer { padding: 2.5rem 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <svg viewBox="0 0 18223.2 11214.09" xmlns="http://www.w3.org/2000/svg" style="height:38px;width:auto">
+      <defs>
+        <style>.nfil0{fill:#289E6F}.nfil1{fill:#008651}.nfil2{fill:#16945D}.nfil3{fill:#057347}.nfil4{fill:#289E6F}.nfil5{fill:#342E93}.nfil6{fill:#008651}</style>
+        <font id="nFont" horiz-adv-x="624" font-variant="normal" font-style="normal" font-weight="400">
+          <font-face font-family="FuturaBkBT"><font-face-src><font-face-name name="Futura Bk BT Book"/></font-face-src></font-face>
+          <glyph unicode="C" horiz-adv-x="725" d="M666 543.999c-34.1676,37.167 -70.668,64.6694 -109.332,82.3321 -38.8333,17.8379 -81.6656,26.6664 -128.503,26.6664 -37.8335,0 -74.6672,-7.66498 -110.665,-22.9949 -35.8339,-15.3356 -67.166,-36.6699 -93.4992,-64.0028 -27.333,-28.3327 -47.8369,-59.9981 -61.5006,-95.0017 -13.6693,-34.9979 -20.4983,-73.6674 -20.4983,-115.997 0,-33.1678 3.99912,-63.8334 12.1668,-91.8329 8.16204,-27.9995 20.3289,-53.6661 36.6642,-77.1694 28.666,-40.6634 63.8334,-72.0011 105.666,-93.9962 41.8326,-22.0008 86.9978,-33.004 135.501,-33.004 45.6679,0 87.9976,9.50073 127,28.3327 39.1665,18.8377 74.831,47.0009 106.999,84.5012l0 -112.834c-35.5007,-25.6667 -73.6674,-45.1652 -114.5,-58.3318 -40.8328,-13.1666 -83.1681,-19.668 -126.831,-19.668 -37.6697,0 -74.5034,5.66542 -110.337,16.8324 -35.8339,11.167 -69.3294,27.6662 -100.667,49.17 -51.9998,35.9977 -91.8329,80.4964 -119.33,133.168 -27.5024,52.8302 -41.3355,110.665 -41.3355,173.832 0,54.9992 9.16747,105.163 27.6662,150.165 18.3349,45.1652 46.3344,86.0036 84.1679,122.832 36.5004,35.1674 76.8305,61.5006 121.165,78.8357 44.3349,17.499 92.6688,26.1694 145.002,26.1694 41.4993,0 81.4962,-6.33759 120.166,-18.8377 38.8333,-12.5001 77,-31.8291 114.833,-58.1623l0 -111.004z"/>
+          <glyph unicode="O" horiz-adv-x="870" d="M435 60.9979c38.9971,0 76.3335,7.33737 111.501,22.1703 35.3312,14.8329 67.166,36.5004 95.4987,64.8332 27.9995,27.9995 49.3338,59.6648 64.0028,95.1655 14.6634,35.5007 21.9952,73.1647 21.9952,112.834 0,39.9968 -7.33172,78.1636 -22.1646,114.331 -14.8329,36.1672 -36.1672,68.002 -63.8334,95.6682 -27.9995,27.9995 -59.6648,49.3338 -95.0017,64.0028 -35.1674,14.6634 -72.662,21.9952 -111.998,21.9952 -39.6692,0 -77.3332,-7.33172 -112.834,-21.9952 -35.5007,-14.6691 -66.8327,-36.0034 -94.1657,-64.0028 -27.9995,-28.3327 -49.3338,-60.3313 -64.0028,-96.1653 -14.6634,-35.8339 -21.9952,-73.8368 -21.9952,-113.834 0,-39.6692 7.16226,-77.1694 21.6619,-112.331 14.4996,-35.1674 36.0034,-67.0022 64.3361,-95.6682 28.666,-28.666 60.5008,-50.3335 95.3349,-65.0026 34.9979,-14.6634 72.3287,-22.0008 111.665,-22.0008zm382.001 295.003c0,-51.1695 -9.50073,-99.334 -28.3327,-144.499 -18.832,-45.3346 -46.3344,-85.5009 -82.5016,-120.668 -36.1672,-35.1674 -77.8303,-62.1671 -124.831,-81.3324 -47.1704,-19.0015 -95.8376,-28.5022 -146.335,-28.5022 -50.503,0 -99.0008,9.50073 -145.832,28.5022 -46.6677,19.1653 -88.167,46.165 -124.334,81.3324 -36.5004,35.5007 -64.1667,75.8364 -83.3319,121.165 -19.0015,45.1708 -28.5022,93.1659 -28.5022,144.002 0,51.1639 9.50073,99.334 28.5022,144.832 19.1653,45.3346 46.8315,85.8342 83.3319,121.335 35.8339,34.8341 77.1638,61.6644 124.165,80.4964 46.8371,18.8377 95.4987,28.3384 146.002,28.3384 50.8306,0 99.6673,-9.50073 146.832,-28.3384 47.0009,-18.832 88.5003,-45.6623 124.334,-80.4964 36.1672,-35.1674 63.6696,-75.5031 82.5016,-120.832 18.832,-45.5041 28.3327,-93.8381 28.3327,-145.335z"/>
+          <glyph unicode="W" horiz-adv-x="913" d="M-6.99846 715.001l91.9967 0 181.169 -526.003 188.998 554.002 190.834 -554.002 182.169 526.003 91.8329 0 -276.832 -743 -187.004 552.997 -186.162 -552.997 -277.001 743z"/>
+          <glyph unicode="R" horiz-adv-x="535" d="M85.998 0l0 715.001 168.003 0c47.8313,0 82.9987,-2.66608 105.169,-7.99824 22.3284,-5.50161 41.9964,-14.6691 58.9983,-27.6719 21.1648,-16.4992 37.5002,-38.8333 49.1643,-66.6633 11.8336,-27.8357 17.6684,-58.665 17.6684,-92.4994 0,-58.5012 -16.3354,-103.169 -49.0005,-133.502 -32.8346,-30.5018 -80.6658,-45.6679 -143.833,-45.6679l-15.1661 0 272.996 -340.998 -107.999 0 -260.999 340.998 -11.9974 0 0 -340.998 -83.0043 0zm83.0043 643l0 -238.998 64.8332 0c66.4995,0 110.998,8.50095 133.496,25.6667 22.5035,16.9963 33.6705,46.8315 33.6705,89.5001 0,45.8317 -11.5003,77.8303 -34.6703,96.3347 -23.1644,18.3293 -67.3298,27.4968 -132.496,27.4968l-64.8332 0z"/>
+          <glyph unicode="I" horiz-adv-x="258" d="M86.9978 0l0 715.001 85.0039 0 0 -715.001 -85.0039 0z"/>
+          <glyph unicode="E" horiz-adv-x="520" d="M85.998 0l0 715.001 377.002 0 0 -77.9998 -291.998 0 0 -205 291.998 0 0 -78.9995 -291.998 0 0 -274.002 291.998 0 0 -78.9995 -377.002 0z"/>
+        </font>
+      </defs>
+      <polygon class="nfil0" points="7555.16,3383.31 9111.74,4281.99 7555.16,5180.6"/>
+      <polygon class="nfil1" points="9111.74,0 9111.74,914.18 12028.71,2598.17 12820.38,2140.96"/>
+      <polygon class="nfil1" points="9111.74,4281.99 7555.16,3383.31 9111.74,2484.96 10668.27,3383.31"/>
+      <polygon class="nfil2" points="6194.64,2598.17 5403.21,2140.96 9111.74,0 9111.74,914.18"/>
+      <polygon class="nfil3" points="7555.16,5180.6 9111.74,4281.99 9111.74,6079.52"/>
+      <polygon class="nfil0" points="9111.74,8564.31 9111.74,7650.47 12028.71,5966.14 11230.99,5505.78 12820.38,6423.28"/>
+      <polygon class="nfil1" points="6194.64,5966.14 9111.74,7650.47 9111.74,8564.31 5403.21,6423.28"/>
+      <polygon class="nfil4" points="6194.64,5966.14 5403.21,6423.28 5403.21,2140.96 6194.64,2598.17"/>
+      <polygon class="nfil3" points="12820.38,6423.28 10668.27,5180.6 12820.38,3938.23"/>
+      <polygon class="nfil5" points="11230.99,5505.78 10668.27,5180.6"/>
+      <polygon class="nfil2" points="10668.27,5180.6 9111.74,6079.52 9111.74,4281.99 12820.38,2140.96 12820.38,3938.23"/>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Philosophy</a></li>
+    <li><a href="#pillars">Portfolio</a></li>
+    <li><a href="#stats">Why Cowrie</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Work With Us</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-video-wrap">
+    <div class="hero-bg"></div>
+    <div class="hero-ray"></div>
+    <div class="hero-horizon"></div>
+  </div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">A Diversified Global Holding Company</span>
+    <span class="hero-wordmark">Cowrie Group</span>
+    <h1 class="hero-title">Investing in the <em>Foundations</em> of Tomorrow.</h1>
+    <p class="hero-sub">Dedicated to scaling high-impact ventures across the globe in critical sectors.</p>
+    <div class="hero-actions">
+      <a href="#pillars" class="btn-primary">Our Portfolio</a>
+      <a href="#contact" class="btn-outline">Work With Us</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="about-label">Our Philosophy</p>
+    <h2 class="about-title">A Legacy Symbol.<br>A Future-Forward<br>Mandate.</h2>
+    <div class="about-ornament"></div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <p class="about-text">
+      Named after the cowrie shell—<strong>a historical symbol of wealth, trade, and resilience</strong>—Cowrie Group bridges the gap between traditional stability and future-forward innovation.<br><br>
+      We don't just provide capital; we provide the <strong>operational excellence</strong> required to sustain growth. Where others see risk, we see architecture waiting to be built.
+    </p>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars">
+  <div class="pillars-header reveal">
+    <span class="section-label">The Ecosystem</span>
+    <h2 class="section-title">Our Four Pillars</h2>
+  </div>
+  <div class="pillars-grid">
+
+    <div class="pillar-card reveal">
+      <span class="pillar-num">01 /</span>
+      <h3 class="pillar-name"><a href="https://www.cowrieholdings.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Cowrie Holdings</a></h3>
+      <p class="pillar-focus">Early-stage Angel Investments · Fintech · Energy · Mobility</p>
+      <div class="pillar-divider"></div>
+      <p class="pillar-preview">Seeding the next generation of African founders.</p>
+      <div class="pillar-detail">
+        <p>We empower the next generation of African founders by providing the seed capital and strategic mentorship needed to disrupt the status quo.</p>
+        <a href="https://www.cowrieholdings.com" target="_blank" rel="noopener" class="pillar-link">Visit Cowrie Holdings</a>
+      </div>
+      <div class="pillar-icon">◇</div>
+    </div>
+
+    <div class="pillar-card reveal reveal-delay-1">
+      <span class="pillar-num">02 /</span>
+      <h3 class="pillar-name">Cowrie Enterprises</h3>
+      <p class="pillar-focus">SMB Acquisition & Operations · United States</p>
+      <div class="pillar-divider"></div>
+      <p class="pillar-preview">Preserving legacies through modern stewardship.</p>
+      <div class="pillar-detail">
+        <p>We preserve the legacies of established SMBs across the United States—purchasing and operating businesses we ensure long-term profitability through modern management and digital transformation.</p>
+      </div>
+      <div class="pillar-icon">◈</div>
+    </div>
+
+    <div class="pillar-card reveal reveal-delay-2">
+      <span class="pillar-num">03 /</span>
+      <h3 class="pillar-name">Cowrie Real Estate</h3>
+      <p class="pillar-focus">Commercial & Rental Assets · Emerging Urban Hubs</p>
+      <div class="pillar-divider"></div>
+      <p class="pillar-preview">Building tangible value in high-yield markets.</p>
+      <div class="pillar-detail">
+        <p>Acquisition and management of high-yield rental properties and strategic commercial spaces in emerging urban hubs—creating lasting built value.</p>
+      </div>
+      <div class="pillar-icon">◻</div>
+    </div>
+
+    <div class="pillar-card reveal reveal-delay-3">
+      <span class="pillar-num">04 /</span>
+      <h3 class="pillar-name"><a href="https://www.cowriebioenergy.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Cowrie Bioenergy</a></h3>
+      <p class="pillar-focus">Biogas Infrastructure & Advisory · Circular Economy</p>
+      <div class="pillar-divider"></div>
+      <p class="pillar-preview">Turning waste into power. Leading the energy transition.</p>
+      <div class="pillar-detail">
+        <p>End-to-end advisory, financing, and operations for biogas-to-energy facilities. We lead the transition to a circular economy, where every input finds its highest use.</p>
+        <a href="https://www.cowriebioenergy.com" target="_blank" rel="noopener" class="pillar-link">Visit Cowrie Bioenergy</a>
+      </div>
+      <div class="pillar-icon">◉</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stats-header reveal">
+      <span class="section-label">Why Cowrie Group</span>
+      <h2 class="stats-title">The Cowrie Advantage</h2>
+    </div>
+    <div class="stats-scroll-track">
+
+      <div class="stat-item reveal">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <p class="stat-label">Portfolio Strategy</p>
+        <div class="stat-value">4</div>
+        <p class="stat-desc">Distinct industries providing cross-sector stability and diversified risk management.</p>
+        <span class="stat-tag">Diversified Risk</span>
+      </div>
+
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <p class="stat-label">Geographic Reach</p>
+        <div class="stat-value">3+</div>
+        <p class="stat-desc">Continents of active operations, with deep roots in the Sub-Saharan African economic landscape.</p>
+        <span class="stat-tag">Regional Expertise</span>
+      </div>
+
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <p class="stat-label">Approach</p>
+        <div class="stat-value">Operators</div>
+        <p class="stat-desc">We are operators, not just investors. We get our hands dirty and deliver operational alpha on every engagement.</p>
+        <span class="stat-tag">Operational Alpha</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg-text">COWRIE</div>
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Let's Build Something Lasting.</h2>
+      <p>Whether you're a founder seeking capital, an operator exploring partnership, or an investor aligned with our thesis — we want to hear from you.</p>
+      <div class="contact-info">
+        <a href="https://www.cowrieholdings.com" target="_blank" rel="noopener">cowrieholdings.com ↗</a>
+        <a href="https://www.cowriebioenergy.com" target="_blank" rel="noopener">cowriebioenergy.com ↗</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn ↗</a>
+        <a href="#" aria-label="Twitter / X">Twitter / X ↗</a>
+        <a href="#" aria-label="Annual Reports">Annual Reports ↗</a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="form-group">
+        <label>Inquiry Type</label>
+        <select>
+          <option value="" disabled selected>Select a category</option>
+          <option>Partnership</option>
+          <option>Investment Pitch</option>
+          <option>Real Estate</option>
+          <option>Bioenergy Advisory</option>
+          <option>General</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="First"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Last"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@company.com"/>
+      </div>
+      <div class="form-group">
+        <label>Organization</label>
+        <input type="text" placeholder="Company or Fund Name"/>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your vision…"></textarea>
+      </div>
+      <button class="btn-submit">Send Inquiry →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 18223.2 11214.09" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;opacity:0.6">
+        <polygon style="fill:#289E6F" points="7555.16,3383.31 9111.74,4281.99 7555.16,5180.6"/>
+        <polygon style="fill:#008651" points="9111.74,0 9111.74,914.18 12028.71,2598.17 12820.38,2140.96"/>
+        <polygon style="fill:#008651" points="9111.74,4281.99 7555.16,3383.31 9111.74,2484.96 10668.27,3383.31"/>
+        <polygon style="fill:#16945D" points="6194.64,2598.17 5403.21,2140.96 9111.74,0 9111.74,914.18"/>
+        <polygon style="fill:#057347" points="7555.16,5180.6 9111.74,4281.99 9111.74,6079.52"/>
+        <polygon style="fill:#289E6F" points="9111.74,8564.31 9111.74,7650.47 12028.71,5966.14 11230.99,5505.78 12820.38,6423.28"/>
+        <polygon style="fill:#008651" points="6194.64,5966.14 9111.74,7650.47 9111.74,8564.31 5403.21,6423.28"/>
+        <polygon style="fill:#289E6F" points="6194.64,5966.14 5403.21,6423.28 5403.21,2140.96 6194.64,2598.17"/>
+        <polygon style="fill:#057347" points="12820.38,6423.28 10668.27,5180.6 12820.38,3938.23"/>
+        <polygon style="fill:#342E93" points="11230.99,5505.78 10668.27,5180.6"/>
+        <polygon style="fill:#16945D" points="10668.27,5180.6 9111.74,6079.52 9111.74,4281.99 12820.38,2140.96 12820.38,3938.23"/>
+      </svg>
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://www.cowrieholdings.com" target="_blank" rel="noopener">Cowrie Holdings</a></li>
+      <li><a href="https://www.cowriebioenergy.com" target="_blank" rel="noopener">Cowrie Bioenergy</a></li>
+      <li><a href="#">Annual Reports</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Twitter</a></li>
+    </ul>
+    <p class="footer-copy">© 2024 Cowrie Group. All rights reserved. Investing in the foundations of tomorrow.</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Pillar touch support for mobile
+  document.querySelectorAll('.pillar-card').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('hover-active'));
+  });
+</script>
+</body>
+</html>
